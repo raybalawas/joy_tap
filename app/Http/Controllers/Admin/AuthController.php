@@ -47,8 +47,21 @@ class AuthController extends Controller
     {
 
         $validatedData = $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|email|exists:admins,email',
+        ], [
+            'email.required' => 'The email field is required.',
+            'email.email' => 'This field must be a valid email address.',
+            'email.exists' => 'The email is incorrect, please check and reenter.',
         ]);
+
+
+        // $email = $validatedData['email'];
+
+        // $admins = Admin::where('email', $email)->first();
+
+        // if ($admins == null) {
+        //     dd('ok it is not a admin');
+        // }
 
         $token_already_present = DB::table('password_reset_tokens')->where(['email' => $request->email])->first();
         // dd($token_already_present);

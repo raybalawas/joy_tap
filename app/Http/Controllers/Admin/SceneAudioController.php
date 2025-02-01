@@ -32,7 +32,7 @@ class SceneAudioController extends Controller
     {
         // Validate the request inputs
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|exists:scenes,name',
             'scene_audio' => 'required|file|mimes:mp3,wav,ogg|max:102400', // Ensure |max:102400 it's a valid audio file
         ]);
 
@@ -82,7 +82,7 @@ class SceneAudioController extends Controller
 
         // Validate the request inputs
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|exists:scenes,name',
             'scene_audio' => 'nullable|file|mimes:mp3,wav,ogg|max:10240', // Optional, only if updating audio file
         ]);
 

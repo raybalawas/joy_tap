@@ -70,7 +70,7 @@ class AnimalVideoController extends Controller
         // Validate the request inputs
         $request->validate([
             'animal_type' => 'required|string|max:255',
-            'scene' => 'required|string|max:255',
+            'scene' => 'required|string|max:255|exists:scenes,name',
             'language' => 'required|string|max:255|exists:languages,id',
             'ln_audio' => 'required|file|mimes:mp3,wav,ogg|max:102400',
             'scene_audio' => 'required|exists:scene_audio,id',
@@ -201,7 +201,7 @@ class AnimalVideoController extends Controller
     {
         $request->validate([
             'animal_type' => 'required|string|max:255',
-            'scene' => 'required|string|max:255',
+            'scene' => 'required|string|max:255|exists:scenes,name',
             'language' => 'required|string|max:255|exists:languages,id',
             'video_link' => 'nullable|file|mimes:mp4',
             'ln_audio' => 'nullable|file|mimes:mp3,wav',
