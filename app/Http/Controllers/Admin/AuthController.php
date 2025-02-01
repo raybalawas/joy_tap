@@ -28,8 +28,6 @@ class AuthController extends Controller
         $validatedData = $request->validate([
             'email' => 'required|email|exists:admins,email',
             'password' => 'required|min:8',
-        ],[
-            'email.required' => 'email is required',
         ]);
 
         if (Auth::guard('admin')->attempt($validatedData)) {
