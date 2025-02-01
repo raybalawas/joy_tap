@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -19,7 +18,7 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
-    public function loginView(Request $request)
+    public function loginView()
     {
         return view('admin.auth.login');
     }
@@ -29,6 +28,8 @@ class AuthController extends Controller
         $validatedData = $request->validate([
             'email' => 'required|email|exists:admins,email',
             'password' => 'required|min:8',
+        ],[
+            'email.required' => 'email is required',
         ]);
 
         if (Auth::guard('admin')->attempt($validatedData)) {
